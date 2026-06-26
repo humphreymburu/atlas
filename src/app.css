@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html,
+	body {
+		height: 100%;
+	}
+
+	body {
+		@apply bg-ink-950 text-fg font-sans antialiased;
+		overscroll-behavior: none;
+	}
+
+	/* Instrument-style numerals: tabular mono for any data figure */
+	.tnum {
+		@apply font-mono tabular-nums;
+		font-feature-settings: 'tnum' 1;
+	}
+
+	.eyebrow {
+		@apply font-mono text-[10px] uppercase tracking-[0.18em] text-fg-faint;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		@apply bg-ink-600 rounded-full;
+		border: 2px solid transparent;
+		background-clip: content-box;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-line;
+	}
+
+	:focus-visible {
+		outline: 2px solid theme('colors.accent.DEFAULT');
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+}
+
+@layer components {
+	.panel {
+		@apply bg-ink-850/95 backdrop-blur-md border border-ink-600 rounded-xl shadow-panel;
+	}
+
+	.btn {
+		@apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium
+			transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+	}
+	.btn-ghost {
+		@apply btn text-fg-muted hover:text-fg hover:bg-ink-700;
+	}
+	.btn-accent {
+		@apply btn bg-accent text-ink-950 hover:bg-accent-soft font-semibold;
+	}
+	.btn-outline {
+		@apply btn border border-ink-600 text-fg hover:border-accent hover:text-accent;
+	}
+
+	.chip {
+		@apply inline-flex items-center gap-1.5 rounded-full border border-ink-600 bg-ink-800
+			px-2.5 py-1 text-xs text-fg-muted;
+	}
+}
+
+/* Mapbox GL chrome, retinted to match the console */
+.mapboxgl-ctrl-group {
+	@apply !bg-ink-800 !border !border-ink-600 !rounded-lg overflow-hidden;
+	box-shadow: none !important;
+}
+.mapboxgl-ctrl-group button {
+	@apply !bg-ink-800;
+}
+.mapboxgl-ctrl-group button + button {
+	@apply !border-t !border-ink-600;
+}
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+	filter: invert(0.85) hue-rotate(150deg);
+}
+.mapboxgl-ctrl-attrib {
+	@apply !bg-ink-900/80 !text-fg-faint;
+}
+.mapboxgl-ctrl-attrib a {
+	@apply !text-fg-muted;
+}
+.mapboxgl-popup-content {
+	@apply !bg-ink-800 !text-fg !border !border-ink-600 !rounded-lg !shadow-panel !p-0;
+}
+.mapboxgl-popup-tip {
+	border-top-color: theme('colors.ink.800') !important;
+	border-bottom-color: theme('colors.ink.800') !important;
+}
+.mapboxgl-popup-close-button {
+	@apply !text-fg-muted !text-lg !pr-2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
+	}
+}
